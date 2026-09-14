@@ -163,11 +163,12 @@ Le cœur du TP repose sur le choix du **régime de passage des objets** sur le r
   - S'abonner / Se désabonner des alertes de seuil.
   - Quitter proprement (dé-exporter l'observateur pour permettre l'arrêt réel de la JVM !).
 - **Structure interne du client (Obligatoire)** :
-  ```
-  client/
-  ├── Main (Point d'entrée : arguments hôte/port, lookup, lance UI)
-  ├── service/LogiqueClient (Opérations métier, appels sur stubs RMI)
-  └── ui/ConsoleUI (Menu, Scanner, affichage — ZÉRO import RMI)
+  ```text
+  client/src/cabinet/
+  ├── ClientMain.java         # Point d'entrée (arguments hôte/port, lookup, lance UI)
+  ├── CabinetService.java     # Logique client (opérations métier, appels sur stubs RMI)
+  ├── ClientObserverImpl.java # Réception des alertes serveur (A6)
+  └── ConsoleUI.java          # Interface console (Menu, Scanner, affichage — ZÉRO import RMI)
   ```
 - **Robustesse attendue** :
   - Gestion des erreurs de saisie sans crash.
@@ -189,7 +190,9 @@ Le cœur du TP repose sur le choix du **régime de passage des objets** sur le r
 
 ### Partie C : Interface Graphique GUI *(Bonus jusqu'à +1 pt)*
 *Condition stricte : Réutiliser directement la couche `LogiqueClient` de l'étape A8 sans dupliquer la gestion RMI.*
-- **C1** : Choisir Swing (recommandé car natif JDK) ou JavaFX.
+- **C1** : Choisir la technologie :
+  - **Interface Web locale (HTML / CSS / JS)** servie par un mini serveur HTTP interne au client (`HttpServer` du JDK standard, zéro dépendance) : moderne, esthétique et autorisée explicitement par le sujet.
+  - **Swing** (inclus dans le JDK) ou **JavaFX**.
 - **C2** : Écrans pour lister, chercher, ajouter des patients, éditer le dossier, et voir les alertes en direct.
 - **Points techniques** :
   - Mettre à jour l'UI lors d'une alerte via le fil d'exécution graphique (`SwingUtilities.invokeLater`).
@@ -221,43 +224,33 @@ L'archive finale doit être nommée `NOM_Prenom_HAI704I_TP1.zip` et contenir :
 
 ---
 
-## 6. Structure Projet Recommandée pour Démarrer
+## 6. Structure Projet Ultra-Simplifiée (Partie A)
 
-Pour implémenter simplement et proprement cette architecture :
+Pour implémenter cette architecture sans complexité inutile :
+- **Package unique et direct** : **`cabinet`** (pas de sous-dossiers superflus ni de hiérarchie profonde).
+- **Zéro outil lourd obligatoire** : compilation directe avec `javac` (ou via ton IDE habituel), pas besoin de Maven (`pom.xml`) ni de scripts complexes pour la Partie A.
 
 ```text
 HAI704I-TP1/
 ├── common/
-│   └── src/
-│       └── fr/umontpellier/ig5/vet/common/
-│           ├── model/
-│           │   ├── Espece.java                 # Serializable (A2)
-│           │   └── DossierSuivi.java           # Remote ou Serializable (A3)
-│           ├── dto/ (ou exceptions)
-│           │   └── PatientNotFoundException.java
-│           ├── remote/
-│           │   ├── Animal.java                 # Remote (A1)
-│           │   ├── CabinetVeterinaire.java     # Remote (A4)
-│           │   └── CabinetObserver.java        # Remote (A6)
+│   └── src/cabinet/
+│       ├── Espece.java                 # Serializable (A2)
+│       ├── DossierSuivi.java           # Remote (A3)
+│       ├── Animal.java                 # Remote (A1)
+│       ├── CabinetVeterinaire.java     # Remote (A4/A5/A6)
+│       └── CabinetObserver.java        # Remote - callback alertes (A6)
 ├── server/
-│   └── src/
-│       └── fr/umontpellier/ig5/vet/server/
-│           ├── impl/
-│           │   ├── AnimalImpl.java             # Servant
-│           │   ├── DossierSuiviImpl.java       # Si choix Remote
-│           │   └── CabinetVeterinaireImpl.java # Servant
-│           └── ServerMain.java                 # Registre + Publication
+│   └── src/cabinet/
+│       ├── AnimalImpl.java             # Servant Animal (A1)
+│       ├── DossierSuiviImpl.java       # Servant Dossier (A3)
+│       ├── CabinetVeterinaireImpl.java # Servant Cabinet (A4/A5/A6)
+│       └── ServerMain.java             # Registre & Publication
 ├── client/
-│   └── src/
-│       └── fr/umontpellier/ig5/vet/client/
-│           ├── service/
-│           │   └── CabinetServiceClient.java   # Logique client (appels RMI)
-│           ├── observer/
-│           │   └── ClientObserverImpl.java     # Implémentation Observer client
-│           ├── ui/
-│           │   └── CommandLineInterface.java   # Menus & saisies (ZÉRO RMI)
-│           └── ClientMain.java                 # Lanceur client CLI
-├── build.sh / pom.xml                          # Outils de compilation
-├── CAHIER_DES_CHARGES_TP1.md                   # Ce document de référence
-└── README.md
+│   └── src/cabinet/
+│       ├── CabinetService.java         # Logique métier client (appels RMI)
+│       ├── ClientObserverImpl.java     # Observateur pour les alertes (A6)
+│       ├── ConsoleUI.java              # CLI / Menu console (A8 - ZÉRO import RMI)
+│       └── ClientMain.java             # Point d'entrée (args, lookup, bootstrap)
+├── CAHIER_DES_CHARGES_TP1.md           # Ce document de référence
+└── README.md                           # Documentation de lancement
 ```
