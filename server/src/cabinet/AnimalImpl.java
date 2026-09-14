@@ -3,11 +3,13 @@ package cabinet;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+
+//A1
 public class AnimalImpl extends UnicastRemoteObject implements Animal
 {
     private String nom = "Opaline";
     private String race = "Chihuahua";
-    private String espece = "Chien";
+    private Espece espece = new Espece("Chien", 13);
     private String maitre = "Anne";
 
     public AnimalImpl () throws RemoteException 
@@ -16,22 +18,22 @@ public class AnimalImpl extends UnicastRemoteObject implements Animal
     }
 
     @Override
-    public String get_nom()
+    public String getNom()
     {
         return this.nom;
     }
     @Override
-    public String get_race()
+    public String getRace()
     {
         return this.race;
     }
+
     @Override
-    public String get_espece()
-    {
+    public Espece getEspece() {
         return this.espece;
     }
     @Override
-    public String get_maitre()
+    public String getMaitre()
     {
         return this.maitre;
     }
