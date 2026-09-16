@@ -60,3 +60,12 @@ Le contrat propose deux façons d'accéder aux patients :
 
 Résultat :
 [resultat](docs/img4.png)
+
+A5 : Création d'un patient côté serveur
+
+Pour éviter que le patient ne soit créé localement dans la mémoire du client (ce qui le ferait disparaître à la déconnexion), l'instanciation doit se faire sur le serveur. 
+
+J'ai donc ajouté la méthode ajouterPatient(...) dans le contrat CabinetVeterinaire, implémentée côté CabinetVeterinaireImpl pour créer et enregistrer l'animal sur la JVM du serveur.
+
+Résultat : 
+[resultat](docs/img5.png)

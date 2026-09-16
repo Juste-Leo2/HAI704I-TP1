@@ -35,4 +35,16 @@ public class CabinetVeterinaireImpl extends UnicastRemoteObject implements Cabin
         }
         return null;
     }
+
+    //setters
+
+    //ajouter le nouveau patient côté serveur
+    @Override
+    public Animal ajouterPatient(String nom, String nomMaitre, String race, Espece espece) throws RemoteException 
+    {
+        Animal nouvelAnimal = new AnimalImpl(nom, race, espece, nomMaitre, new DossierSuiviImpl());
+        this.patients.add(nouvelAnimal);
+        return nouvelAnimal;
+    }
+
 }

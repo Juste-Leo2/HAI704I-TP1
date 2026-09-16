@@ -26,7 +26,7 @@ public class ClientMain
             System.out.println("Nom de l'animal : " + stub.getNom());
             System.out.println("Classe du stub : " + stub.getClass().getName());
             System.out.println("Est-ce un Proxy dynamique ? " + java.lang.reflect.Proxy.isProxyClass(stub.getClass()));
-            ////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////
 
             //////////////////////////////////A2/////////////////////////////////////// 
             Espece e = stub.getEspece();
@@ -41,7 +41,7 @@ public class ClientMain
 
             System.out.println("HashCode e  : " + System.identityHashCode(e));
             System.out.println("HashCode e2 : " + System.identityHashCode(e2));
-            /////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////
 
             //////////////////////////////////A3/////////////////////////////////////// 
             DossierSuivi dossier = stub.getDossier();
@@ -53,11 +53,20 @@ public class ClientMain
 
             System.out.println("Classe du dossier : " + dossier.getClass().getName());
             System.out.println("Est-ce un Proxy RMI ? " + java.lang.reflect.Proxy.isProxyClass(dossier.getClass()));
-            /////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////
 
             //////////////////////////////////A4/////////////////////////////////////// 
             System.out.println("Patients dans le cabinet : " + cabinet.getPatients().size());
-            /////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////A5/////////////////////////////////////// 
+            Animal medor = cabinet.ajouterPatient("Sora", "Paul", "husky", new Espece("Chien", 12));
+            System.out.println("Patients dans le cabinet : " + cabinet.getPatients().size());
+
+            Animal trouve = cabinet.rechercherPatient("Sora");
+            System.out.println("Patient retrouvé par recherche : " + trouve.getNom());
+            ///////////////////////////////////////////////////////////////////////////
+
 
 
         }

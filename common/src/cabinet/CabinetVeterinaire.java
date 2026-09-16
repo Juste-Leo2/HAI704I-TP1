@@ -12,4 +12,7 @@ public interface CabinetVeterinaire extends Remote
     //getters (A4)
     List<Animal> getPatients() throws RemoteException;
     Animal rechercherPatient(String nom) throws RemoteException;
+
+    //setters (A5)
+    Animal ajouterPatient(String nom, String nomMaitre, String race, Espece espece) throws RemoteException;
 }
