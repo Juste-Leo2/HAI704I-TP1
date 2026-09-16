@@ -47,3 +47,16 @@ Le client n'a pas besoin de chercher le dossier dans l'annuaire RMI : il récup�
 
 Résultats :
 [resultat](docs/img3.png)
+
+A4 : Création du cabinet vétérinaire
+
+J'ai créé le contrat CabinetVeterinaire qui remplace Animal comme point d'entrée unique dans le registre RMI.
+
+le registre ne publie qu'un seul objet : le cabinet. Les animaux et leurs dossiers ne sont plus enregistrés dans l'annuaire RMI : c'est le cabinet qui les contient et les distribue au client.
+
+Le contrat propose deux façons d'accéder aux patients :
+- getPatients() : pour lister l'ensemble des animaux du cabinet.
+- rechercherPatient(nom) : pour retrouver directement un animal précis par son nom (la recherche s'exécute côté serveur).
+
+Résultat :
+[resultat](docs/img4.png)

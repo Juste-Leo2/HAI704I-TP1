@@ -16,7 +16,12 @@ public class ClientMain
             //////////////////////////////////A1/////////////////////////////////////// 
             Registry registry = LocateRegistry.getRegistry(host);
 
-            Animal stub = (Animal) registry.lookup("Animal");
+            //A1 juste animal
+            //Animal stub = (Animal) registry.lookup("Animal");
+
+            //A4 Generalisation
+            CabinetVeterinaire cabinet = (CabinetVeterinaire) registry.lookup("CabinetVeterinaire");
+            Animal stub = cabinet.rechercherPatient("Opaline");
 
             System.out.println("Nom de l'animal : " + stub.getNom());
             System.out.println("Classe du stub : " + stub.getClass().getName());
@@ -47,7 +52,11 @@ public class ClientMain
             System.out.println("État relu depuis le serveur : " + dossier2.getEtat()); 
 
             System.out.println("Classe du dossier : " + dossier.getClass().getName());
-            System.out.println("Est-ce un Proxy RMI ? " + java.lang.reflect.Proxy.isProxyClass(dossier.getClass()));*
+            System.out.println("Est-ce un Proxy RMI ? " + java.lang.reflect.Proxy.isProxyClass(dossier.getClass()));
+            /////////////////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////A4/////////////////////////////////////// 
+            System.out.println("Patients dans le cabinet : " + cabinet.getPatients().size());
             /////////////////////////////////////////////////////////////////////////////
 
 
