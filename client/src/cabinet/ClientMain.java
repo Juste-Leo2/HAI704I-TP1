@@ -23,6 +23,7 @@ public class ClientMain
             System.out.println("Est-ce un Proxy dynamique ? " + java.lang.reflect.Proxy.isProxyClass(stub.getClass()));
             ////////////////////////////////////////////////////////////////////////////
 
+            //////////////////////////////////A2/////////////////////////////////////// 
             Espece e = stub.getEspece();
             System.out.println("Espèce reçue : " + e.getNom()); // "Chien"
 
@@ -35,6 +36,19 @@ public class ClientMain
 
             System.out.println("HashCode e  : " + System.identityHashCode(e));
             System.out.println("HashCode e2 : " + System.identityHashCode(e2));
+            /////////////////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////A3/////////////////////////////////////// 
+            DossierSuivi dossier = stub.getDossier();
+            System.out.println("État initial du dossier : " + dossier.getEtat()); 
+            dossier.setEtat("En convalescence (patte cassée)");
+            System.out.println("Dossier modifié par le client !");
+            DossierSuivi dossier2 = stub.getDossier();
+            System.out.println("État relu depuis le serveur : " + dossier2.getEtat()); 
+
+            System.out.println("Classe du dossier : " + dossier.getClass().getName());
+            System.out.println("Est-ce un Proxy RMI ? " + java.lang.reflect.Proxy.isProxyClass(dossier.getClass()));*
+            /////////////////////////////////////////////////////////////////////////////
 
 
         }

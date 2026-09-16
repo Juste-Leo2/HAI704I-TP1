@@ -36,3 +36,14 @@ Ensuite, un test de modification via un setter est effectué par le client pour 
 Résultats :
 
 [resultat](docs/img2.png)
+
+A3 : Mise en place du dossier pour l'animal et modification distante partagée
+
+J'ai créé un nouveau contrat DossierSuivi (interface Remote) qui définit les méthodes getEtat() et setEtat(). Ce dossier est implémenté côté serveur par DossierSuiviImpl.
+
+Ensuite, j'ai relié ce dossier à l'animal en ajoutant DossierSuivi getDossier() dans le contrat Animal.
+
+Le client n'a pas besoin de chercher le dossier dans l'annuaire RMI : il récupère directement le stub du dossier via stub.getDossier(). L'appel à dossier.setEtat(...) passe lui aussi par le RMI et modifie l'état directement sur le serveur, ce qui permet un partage en temps réel entre tous les vétérinaires.
+
+Résultats :
+[resultat](docs/img3.png)

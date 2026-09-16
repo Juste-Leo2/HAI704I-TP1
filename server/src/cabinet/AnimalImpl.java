@@ -11,6 +11,7 @@ public class AnimalImpl extends UnicastRemoteObject implements Animal
     private String race = "Chihuahua";
     private Espece espece = new Espece("Chien", 13);
     private String maitre = "Anne";
+    private DossierSuivi dossier = new DossierSuiviImpl();
 
     public AnimalImpl () throws RemoteException 
     {
@@ -36,6 +37,12 @@ public class AnimalImpl extends UnicastRemoteObject implements Animal
     public String getMaitre()
     {
         return this.maitre;
+    }
+
+    @Override
+    public DossierSuivi getDossier() 
+    {
+        return this.dossier;
     }
 
 }
