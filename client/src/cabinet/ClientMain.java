@@ -67,6 +67,17 @@ public class ClientMain
             System.out.println("Patient retrouvé par recherche : " + trouve.getNom());
             ///////////////////////////////////////////////////////////////////////////
 
+            //////////////////////////////////A6/////////////////////////////////////// 
+            // 1. Instancier l'observateur et s'abonner aux alertes
+            CabinetObserver obs = new ClientObserverImpl();
+            cabinet.sAbonner(obs);
+            System.out.println("Client abonné aux alertes du cabinet !");
+
+            // 2. Ajouter un 3eme patient (Rex) pour franchir le seuil 3 et declencher l'alerte
+            Animal patient3 = cabinet.ajouterPatient("Rex", "Sophie", "Berger Allemand", new Espece("Chien", 11));
+            System.out.println("Patients dans le cabinet : " + cabinet.getPatients().size());
+            ///////////////////////////////////////////////////////////////////////////
+
 
 
         }
