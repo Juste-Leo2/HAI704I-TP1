@@ -79,9 +79,10 @@ public class ClientMain
             ///////////////////////////////////////////////////////////////////////////
 
             //////////////////////////////////A7/////////////////////////////////////// 
-            System.out.println("\n--- Test A7 : Envoi d'une instance de Chien (classe locale au client) ---");
+            System.out.println("\n--- Test A7 : Envoi d'une instance de Chien (partagée dans common) ---");
             Animal patientChien = cabinet.ajouterPatient("Rocky", "Alice", "Labrador", new Chien());
-            System.out.println("Patient ajouté avec succès : " + patientChien.getNom());
+            System.out.println("Patient ajouté avec succès : " + patientChien.getNom() + " (Espèce : " + patientChien.getEspece().getNom() + ")");
+            System.out.println("Patients dans le cabinet : " + cabinet.getPatients().size());
             ///////////////////////////////////////////////////////////////////////////
         }
         catch (Exception e)

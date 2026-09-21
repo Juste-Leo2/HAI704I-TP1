@@ -101,7 +101,7 @@ Comme le flux sérialisé RMI transmet seulement l'état et le nom de la classe 
 
 Une erreur a donc été levée :
 
-[resultat](docs/im7_error.png)
+[resultat](docs/img7_error.png)
 
 Et voici les logs exacts :
 
@@ -110,3 +110,10 @@ Client exception: java.rmi.ServerException: RemoteException occurred in server t
 	java.rmi.UnmarshalException: error unmarshalling arguments; nested exception is: 
 	java.lang.ClassNotFoundException: cabinet.Chien (no security manager: RMI class loader disabled)
 ```
+
+Résolution :
+Pour corriger l'erreur, j'ai déplacé la classe Chien dans le module common (`common/src/cabinet/Chien.java`). Le bytecode de la classe est désormais accessible dans le classpath partagé. Le serveur a pu charger la classe et désérialiser l'objet avec succès.
+
+Résultat :
+[resultat](docs/img7_success.png)
+
