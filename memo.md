@@ -20,6 +20,11 @@ javac -cp common/bin -d client/bin client/src/cabinet/*.java
 Pour lancer le test :
 
 ```bash
+# Linux / macOS (séparateur :)
+java -cp "server/bin:common/bin" cabinet.ServerMain
+java -cp "client/bin:common/bin" cabinet.ClientMain
+
+# Windows (séparateur ;)
 java -cp "server/bin;common/bin" cabinet.ServerMain
 java -cp "client/bin;common/bin" cabinet.ClientMain
 ```
@@ -69,3 +74,20 @@ J'ai donc ajouté la méthode ajouterPatient(...) dans le contrat CabinetVeterin
 
 Résultat : 
 [resultat](docs/img5.png)
+
+
+A6 : Système d'alertes et callbacks (mécanisme d'abonnement)
+
+L'objectif est d'avertir automatiquement les vétérinaires (les clients) dès que le nombre de patients franchit un seuil.
+
+Pour que le serveur puisse envoyer des notifications au client (au lieu que le client doive interroger le serveur en continu), on met en place un système d'abonnement / callback :
+- J'ai créé le contrat CabinetObserver (interface Remote) dans common avec la méthode notifierAlerte(String message).
+
+- Côté client, ClientObserverImpl implémente ce contrat et hérite de UnicastRemoteObject. Le client devient donc à son tour hébergeur d'un objet distant : c'est son stub qu'on transmet au serveur lors de l'appel à sAbonner(...).
+
+- Côté serveur, CabinetVeterinaireImpl gère la liste des abonnés (sAbonner et seDesabonner). Dès qu'un ajout de patient atteint un seuil, le serveur parcourt les clients abonnés et appelle leur méthode distante notifierAlerte.
+
+- Pour la robustesse : si un client est coupé brutalement, le serveur capture la RemoteException lors de l'envoi de l'alerte et le retire de sa liste d'abonnés
+
+Résultat :
+[resultat](docs/img6.png)
