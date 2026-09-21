@@ -117,3 +117,23 @@ Pour corriger l'erreur, j'ai déplacé la classe Chien dans le module common (`c
 Résultat :
 [resultat](docs/img7_success.png)
 
+
+A8 : Application interactive (CLI) et découpage 3 tiers
+
+L'objectif est de rendre l'application utilisable via un menu en ligne de commande interactif, tout en respectant une architecture 3 tiers propre :
+
+- **CabinetService** : gère toute la logique métier, les types de données et les appels distants vers le serveur via les stubs RMI. Il s'occupe aussi de la gestion de l'observateur pour les alertes et de la libération des ressources à la fermeture (unexportObject pour arrêter proprement la JVM).
+- **ConsoleUI** : s'occupe uniquement de la partie visuelle (affichage du menu, mise en forme des résultats) et de la saisie utilisateur (Scanner). Elle ne fait que consommer les méthodes fournies par `CabinetService` et ne contient aucun import ni dépendance directe à `java.rmi.*`, isolant totalement l'interface du réseau.
+- **ClientMain** : constitue le point d'entrée. Il analyse les arguments (hôte et port), se connecte au registre RMI pour récupérer le stub du cabinet, instancie le service (CabinetService) puis l'interface (ConsoleUI), et lance la boucle d'interaction.
+
+Le menu permet ainsi à un vétérinaire de :
+1. Consulter l'ensemble des patients du cabinet.
+2. Rechercher un animal précis par son nom.
+3. Enregistrer un nouveau patient avec son espèce et durée de vie.
+4. Consulter et modifier le dossier de suivi médical.
+5. S'abonner ou se désabonner des alertes de seuil en direct.
+0. Quitter proprement le client.
+
+Résultat :
+[resultat](docs/img8.png)
+

@@ -84,6 +84,16 @@ public class ClientMain
             System.out.println("Patient ajouté avec succès : " + patientChien.getNom() + " (Espèce : " + patientChien.getEspece().getNom() + ")");
             System.out.println("Patients dans le cabinet : " + cabinet.getPatients().size());
             ///////////////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////A8/////////////////////////////////////// 
+            System.out.println("\n=======================================================");
+            System.out.println("  Lancement de l'application interactive A8 (3 tiers)  ");
+            System.out.println("=======================================================");
+            CabinetService service = new CabinetService(cabinet);
+            ConsoleUI ui = new ConsoleUI(service);
+            ui.demarrer();
+            ///////////////////////////////////////////////////////////////////////////
+
         }
         catch (Exception e)
         {
