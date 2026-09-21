@@ -78,8 +78,11 @@ public class ClientMain
             System.out.println("Patients dans le cabinet : " + cabinet.getPatients().size());
             ///////////////////////////////////////////////////////////////////////////
 
-
-
+            //////////////////////////////////A7/////////////////////////////////////// 
+            System.out.println("\n--- Test A7 : Envoi d'une instance de Chien (classe locale au client) ---");
+            Animal patientChien = cabinet.ajouterPatient("Rocky", "Alice", "Labrador", new Chien());
+            System.out.println("Patient ajouté avec succès : " + patientChien.getNom());
+            ///////////////////////////////////////////////////////////////////////////
         }
         catch (Exception e)
         {

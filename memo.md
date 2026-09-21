@@ -91,3 +91,22 @@ Pour que le serveur puisse envoyer des notifications au client (au lieu que le c
 
 Résultat :
 [resultat](docs/img6.png)
+
+
+A7 : Expérience de sérialisation (créer une classe côté client et l'envoyer au serveur)
+
+L'objectif est de montrer que le serveur n'est pas capable de charger une classe définie uniquement côté client. Pour cela, j'ai créé une classe Chien (héritant d'Espece) uniquement côté client, et j'ai envoyé une instance de Chien au serveur via la méthode distante ajouterPatient(...).
+
+Comme le flux sérialisé RMI transmet seulement l'état et le nom de la classe (et non le bytecode .class), le serveur ne trouve pas la classe dans son classpath local lors de la désérialisation.
+
+Une erreur a donc été levée :
+
+[resultat](docs/im7_error.png)
+
+Et voici les logs exacts :
+
+```bash
+Client exception: java.rmi.ServerException: RemoteException occurred in server thread; nested exception is: 
+	java.rmi.UnmarshalException: error unmarshalling arguments; nested exception is: 
+	java.lang.ClassNotFoundException: cabinet.Chien (no security manager: RMI class loader disabled)
+```
