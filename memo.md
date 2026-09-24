@@ -22,11 +22,13 @@ Pour lancer le test :
 ```bash
 # Linux / macOS (séparateur :)
 java -cp "server/bin:common/bin" cabinet.ServerMain
-java -cp "client/bin:common/bin" cabinet.ClientMain
+java -cp "client/bin:common/bin" cabinet.ClientMain      # Client Console (CLI - A8)
+java -cp "client/bin:common/bin" cabinet.GuiClientMain   # Client Graphique (GUI Swing - Bonus C)
 
 # Windows (séparateur ;)
 java -cp "server/bin;common/bin" cabinet.ServerMain
-java -cp "client/bin;common/bin" cabinet.ClientMain
+java -cp "client/bin;common/bin" cabinet.ClientMain      # Client Console (CLI - A8)
+java -cp "client/bin;common/bin" cabinet.GuiClientMain   # Client Graphique (GUI Swing - Bonus C)
 ```
 
 Résultats :
@@ -137,3 +139,37 @@ Le menu permet ainsi à un vétérinaire de :
 Résultat :
 [resultat](docs/img8.png)
 
+
+Partie C (Bonus) : Interface Graphique Swing (GUI)
+
+L'objectif est de brancher une seconde interface graphique sur la même logique client (CabinetService) sans toucher au code RMI :
+- **GuiClientMain** : point d'entrée qui effectue le lookup RMI et lance l'interface graphique sur le thread EDT de Swing (SwingUtilities.invokeLater).
+- **SwingUI** : fenêtre graphique simple et native Java (JFrame, JTextArea, JButton) qui consomme directement les méthodes de CabinetService.
+- **Points techniques du sujet** :
+  - Réutilisation stricte de la logique client (aucune duplication du code RMI).
+  - Réception des alertes réseau RMI répercutée sur l'interface via SwingUtilities.invokeLater pour ne pas bloquer le thread graphique.
+
+Pour lancer le client graphique :
+
+```bash
+# Linux / macOS
+java -cp "client/bin:common/bin" cabinet.GuiClientMain
+
+# Windows
+java -cp "client/bin;common/bin" cabinet.GuiClientMain
+```
+
+Résultat :
+[resultat](docs/img_bonus_c.png)
+
+
+
+## Politique d'utilisation de l'IA
+
+Pour réaliser ce TP, j'ai notamment utilisé l'IDE Antigravity de Google. Je l'ai utilisé pour me guider dans le sujet, m'aider à générer du code, corriger les potentielles erreurs de syntaxe et pour finir à bien gérer les commandes de compilation et d'exécution depuis le terminal.
+
+Pour ce qui est des parties A0 à A7, j'ai réalisé du pair-programming : j'ai discuté avec l'IA pour chaque étape. J'ai écrit du code et l'IA me corrigeait et m'expliquait les potentielles erreurs que j'avais faites (ma base d'implémentation initiale était le code Hello World présent dans le sujet de TD, que j'ai transposé à l'étape A1 du sujet à la main).
+
+L'IA générative m'a également permis de faire un résumé de ce qui est demandé dans le sujet via un [Cahier des charges](./CAHIER_DES_CHARGES_TP1.md), de corriger les fautes de mon mémo et de mieux comprendre les enjeux de la gestion du serveur, du registre RMI et du client.
+
+Pour la partie A8 et la partie C, le code étant assez verbeux, j'ai guidé l'IA pour qu'elle me génère un code propre et compréhensible pour un étudiant : c'est-à-dire en utilisant les méthodes et syntaxes de base de Java (notamment côté GUI Swing) et non des bibliothèques ou fonctions complexes que je ne comprendrais pas.

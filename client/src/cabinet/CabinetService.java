@@ -60,11 +60,19 @@ public class CabinetService
      */
     public boolean basculerAbonnement() throws RemoteException 
     {
+        return basculerAbonnement(null);
+    }
+
+    /**
+     * Bascule l'abonnement avec un callback pour notifier l'IHM graphique (fil EDT Swing).
+     */
+    public boolean basculerAbonnement(java.util.function.Consumer<String> onAlerte) throws RemoteException 
+    {
         if (!this.estAbonne) 
         {
             if (this.observateur == null) 
             {
-                this.observateur = new ClientObserverImpl();
+                this.observateur = new ClientObserverImpl(onAlerte);
             }
             this.cabinet.sAbonner(this.observateur);
             this.estAbonne = true;
@@ -86,6 +94,14 @@ public class CabinetService
     public boolean estAbonne() 
     {
         return this.estAbonne;
+    }
+
+    /**
+     * Renvoie le texte de la dernière alerte reçue.
+     */
+    public String getDerniereAlerte() 
+    {
+        return (this.observateur != null) ? this.observateur.getDerniereAlerte() : "";
     }
 
     /**
