@@ -1,3 +1,0 @@
-# Emplacement pour la vidéo de démonstration
-# Placez ici votre fichier demonstration.mp4
-# Ou notez dans liens.txt les liens vers le dépôt Git et la vidéo en streaming (YouTube / Drive)

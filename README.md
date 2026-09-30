@@ -10,9 +10,12 @@
 
 ## 1. Démonstration
 
-| Client Console (CLI - Étape A8) | Client Graphique (Swing - Partie C) |
-| :---: | :---: |
-| ![Démonstration CLI](video/demo_cli.gif) | ![Démonstration GUI](video/demo_gui.gif) |
+Une vidéo complète de démonstration multi-processus (Serveur RMI, 2 Clients CLI et Client Graphique Swing) est incluse directement dans le projet :
+
+[![Démonstration Vidéo - Cabinet Vétérinaire](video/preview.png)](video/demonstration.mp4)
+
+- **[Cliquez ici pour visionner la vidéo de démonstration (demonstration.mp4)](video/demonstration.mp4)**  
+*(Également consultable en ligne sur GitHub : [video/demonstration.mp4](https://github.com/Juste-Leo2/HAI704I-TP1/blob/main/video/demonstration.mp4))*
 
 ---
 
@@ -28,7 +31,7 @@ sudo apt install -y openjdk-21-jdk
 
 ### Sous Windows :
 Téléchargez et installez l'exécutable JDK 21 depuis le site d'Oracle :  
-👉 [Archive de téléchargement Oracle JDK 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
+- [Archive de téléchargement Oracle JDK 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
 
 ### Vérification de l'installation :
 ```bash
@@ -98,6 +101,10 @@ java -cp "client/bin;common/bin" cabinet.ClientMain
 - `4` : Consulter ou mettre à jour un dossier médical (partagé en direct).
 - `5` : S'abonner / se désabonner des alertes de seuil.
 - `0` : Quitter proprement.
+
+> **Option `--no-test` :**  
+> Permet de passer les tests automatiques (A1 à A7) pour lancer directement le menu interactif :  
+> `java -cp "client/bin;common/bin" cabinet.ClientMain --no-test` (Windows) ou `java -cp "client/bin:common/bin" cabinet.ClientMain --no-test` (Linux/macOS).
 
 ### 3. (Bonus) Démarrer le Client Graphique (GUI Swing - Partie C)
 Dans un troisième terminal :

@@ -41,8 +41,8 @@ public class CabinetVeterinaireImpl extends UnicastRemoteObject implements Cabin
         int total = this.patients.size();
 
         // Declenchement de l'alerte au franchissement des seuils (100, 500, 1000 ou
-        // seuil de test 3)
-        if (total == 100 || total == 500 || total == 1000 || total == this.patientMax) {
+        // seuils de test 3 et 5 prévus par le sujet)
+        if (total == 100 || total == 500 || total == 1000 || total == this.patientMax || total == 5) {
             diffuserAlerte("Seuil franchi : le cabinet compte maintenant " + total + " patients !");
         }
 

@@ -2,4 +2,5 @@ Dépôt GitHub du projet :
 https://github.com/Juste-Leo2/HAI704I-TP1
 
 Vidéo de démonstration :
-[Lien YouTube / Drive ou vidéo incluse dans le dossier video/]
+Vidéo incluse directement dans le dossier : video/demonstration.mp4
+(Consultable en ligne sur GitHub : https://github.com/Juste-Leo2/HAI704I-TP1/blob/main/video/demonstration.mp4)

@@ -9,7 +9,20 @@ public class ClientMain
 
     public static void main(String[] args)
     {
-        String host = (args.length < 1) ? null : args[0];
+        String host = null;
+        boolean lancerTests = true;
+
+        for (String arg : args) 
+        {
+            if (arg.equalsIgnoreCase("--no-test") || arg.equalsIgnoreCase("-nt") || arg.equalsIgnoreCase("--skip-tests")) 
+            {
+                lancerTests = false;
+            } 
+            else if (!arg.startsWith("-")) 
+            {
+                host = arg;
+            }
+        }
 
         try
         {
@@ -21,7 +34,10 @@ public class ClientMain
 
             //A4 Generalisation
             CabinetVeterinaire cabinet = (CabinetVeterinaire) registry.lookup("CabinetVeterinaire");
-            Animal stub = cabinet.rechercherPatient("Opaline");
+
+            if (lancerTests) 
+            {
+                Animal stub = cabinet.rechercherPatient("Opaline");
 
             System.out.println("Nom de l'animal : " + stub.getNom());
             System.out.println("Classe du stub : " + stub.getClass().getName());
@@ -76,6 +92,13 @@ public class ClientMain
             // 2. Ajouter un 3eme patient (Rex) pour franchir le seuil 3 et declencher l'alerte
             Animal patient3 = cabinet.ajouterPatient("Rex", "Sophie", "Berger Allemand", new Espece("Chien", 11));
             System.out.println("Patients dans le cabinet : " + cabinet.getPatients().size());
+
+            //////////////////A8/////////////////
+            // Nettoyage de l'observateur de test pour ne pas bloquer l'arret de la JVM en A8
+            cabinet.seDesabonner(obs);
+            java.rmi.server.UnicastRemoteObject.unexportObject(obs, true);
+            /////////////////////////////////////
+
             ///////////////////////////////////////////////////////////////////////////
 
             //////////////////////////////////A7/////////////////////////////////////// 
@@ -84,9 +107,10 @@ public class ClientMain
             System.out.println("Patient ajouté avec succès : " + patientChien.getNom() + " (Espèce : " + patientChien.getEspece().getNom() + ")");
             System.out.println("Patients dans le cabinet : " + cabinet.getPatients().size());
             ///////////////////////////////////////////////////////////////////////////
+        }
 
-            //////////////////////////////////A8/////////////////////////////////////// 
-            System.out.println("\n=======================================================");
+        //////////////////////////////////A8/////////////////////////////////////// 
+        System.out.println("\n=======================================================");
             System.out.println("  Lancement de l'application interactive A8 (3 tiers)  ");
             System.out.println("=======================================================");
             CabinetService service = new CabinetService(cabinet);
