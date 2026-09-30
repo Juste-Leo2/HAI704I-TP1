@@ -1,4 +1,4 @@
-# HAI704I — TP 1 : Java RMI (Cabinet Vétérinaire Distribué)
+# HAI704I - TP 1 : Java RMI (Cabinet Vétérinaire Distribué)
 
 **Université de Montpellier** — Master 1 Informatique (Parcours ICO)  
 **UE HAI704I** : Architectures Logicielles Distribuées  
