@@ -1,9 +1,10 @@
 # HAI704I - TP 1 : Java RMI (Cabinet Vétérinaire Distribué)
 
-**Université de Montpellier** — Master 1 Informatique (Parcours ICO)  
+**Université de Montpellier** - Master 1 Informatique (Parcours ICO)  
 **UE HAI704I** : Architectures Logicielles Distribuées  
 **Enseignant responsable** : Bachar Rima  
 **Auteur** : Léonard ADAMO  
+**Numéro étudiant** : 22517746
 **Dépôt GitHub** : [https://github.com/Juste-Leo2/HAI704I-TP1](https://github.com/Juste-Leo2/HAI704I-TP1)  
 
 ---
@@ -49,6 +50,32 @@ Le projet est découpé en trois modules indépendants :
 - **`common/`** : contrat partagé (interfaces distantes `Remote` et types sérialisables transmis par valeur).
 - **`server/`** : servants RMI et création du registre local sur le port **1099**.
 - **`client/`** : interfaces utilisateur (`ConsoleUI` en CLI et `SwingUI` en GUI) consommant la couche métier (`CabinetService`), sans aucune dépendance directe vers les classes du serveur.
+
+```text
+HAI704I-TP1/
+├── common/                         # Module partagé
+│   └── src/cabinet/
+│       ├── Animal.java
+│       ├── CabinetObserver.java
+│       ├── CabinetVeterinaire.java
+│       ├── Chien.java
+│       ├── DossierSuivi.java
+│       └── Espece.java
+├── server/                         # Module serveur (RMI & Registre)
+│   └── src/cabinet/
+│       ├── AnimalImpl.java
+│       ├── CabinetVeterinaireImpl.java
+│       ├── DossierSuiviImpl.java
+│       └── ServerMain.java
+└── client/                         # Module client (CLI & GUI)
+    └── src/cabinet/
+        ├── CabinetService.java
+        ├── ClientMain.java
+        ├── ClientObserverImpl.java
+        ├── ConsoleUI.java
+        ├── GuiClientMain.java
+        └── SwingUI.java
+```
 
 ---
 
